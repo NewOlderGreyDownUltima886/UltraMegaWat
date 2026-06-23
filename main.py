@@ -47,8 +47,3 @@ class Board:
         y : int = cord // self._board_size #остаток от деления
         return (x, y)
     
-
-# Пример использования
-game = Board(3, [1, 2, 3])
-print(game.num_to_cord(2, 2))
-print(game.cord_to_num(3))
