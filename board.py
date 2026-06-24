@@ -51,8 +51,6 @@ class Board:
                 self.new_symbol = str(e[2])
         # ходим
         self.board[y_cord_new][x_cord_new] = self.new_symbol
-        
-        End.ok
 
         # вывод поля
         for i, e in enumerate(self.board):
@@ -63,7 +61,7 @@ class Board:
         y_core = self.board[self.y_cord_new]
         if len(set(y_core)) == 1 and y_core[0] != '': 
             print(self.going_player + ' Победил!!! горизонталь')
-            End.finished
+            return End.finished
 
         # проверка по вертикали
         x_core = []
@@ -71,7 +69,7 @@ class Board:
             x_core.append(n[self.x_cord_new])
         if len(set(x_core)) == 1 and x_core[0] != '': 
             print(self.going_player + ' Победил!!! вертикаль')
-            End.finished
+            return End.finished
 
         # проверка по диагонали вверх
         dia_up_core = []
@@ -81,7 +79,7 @@ class Board:
                     dia_up_core.append(e[(-r)-1])
         if len(set(dia_up_core)) == 1 and dia_up_core[0] != '': 
             print(self.going_player + ' Победил!!! диагональ вверх')
-            End.finished
+            return End.finished
         
         # проверка по диагонали вниз
         dia_down_core = []
@@ -91,8 +89,10 @@ class Board:
                     dia_down_core.append(t[r])
         if len(set(dia_down_core)) == 1 and dia_down_core[0] != '': 
             print(self.going_player + ' Победил!!! диагональ вниз')
-            End.finished
-        
+            return End.finished
+        else: return End.ok
+
+
 game = Board([3, 3], player_symbol_dict={})
 game.go(x_cord_new=int(), y_cord_new=int(), going_player={}) # (x_cord_new, y_cord_new, 'Гриша')
 game.check_finished()
