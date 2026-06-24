@@ -37,11 +37,8 @@ class Board:
 
         'проверка на вшивость'
         if self.board[y_cord_new][x_cord_new] in self.player_symbols_list:
-            print(self.board)
-            print(self.board[y_cord_new][x_cord_new])
-            print('это менсто занято!')
-            End.no
-            return
+            print('это место занято!')
+            return End.no
         'ход игрока'
 
         # узнаем символ игрока по имени:
@@ -55,6 +52,8 @@ class Board:
         # вывод поля
         for i, e in enumerate(self.board):
             print(str(e))
+
+        return self.check_finished()
 
     def check_finished(self):
         # проверка по горизонтали
@@ -90,18 +89,36 @@ class Board:
         if len(set(dia_down_core)) == 1 and dia_down_core[0] != '': 
             print(self.going_player + ' Победил!!! диагональ вниз')
             return End.finished
-        else: return End.ok
+        
+        return End.ok
 
 
-game = Board([3, 3], player_symbol_dict={})
-game.go(x_cord_new=int(), y_cord_new=int(), going_player={}) # (x_cord_new, y_cord_new, 'Гриша')
-game.check_finished()
+# game = Board([3, 3], player_symbol_dict={})
+# game.go(x_cord_new=int(), y_cord_new=int(), going_player={}) # (x_cord_new, y_cord_new, 'Гриша')
+# game.check_finished()
 
 
-'''game = Board([3, 3], player_symbol_dict={'Коля': '+', 'Гриша': '0', 'Андрей': '#'})
+player_symbol_dict={'Коля': '+', 'Андрей': '#'}
+game = Board([3, 3], player_symbol_dict)
+
+def one_cycle(player):
+    try:
+        print(f'\nХодит: {player}')
+        x_cord_new = int(input('введите ход по х: '))
+        y_cord_new = int(input('введите ход по y: '))
+
+        res = game.go(x_cord_new, y_cord_new, player)
+        if res == End.no:
+            print('Попробуй еще раз')
+            return one_cycle(player)
+        elif res == End.finished:
+            print(f"{player} победил!")
+            quit()
+
+    except Exception:
+            print('Произошла какая-то ошибка, попробуйте еще раз...')
+            return one_cycle(player)
+
 while True:
-    x_cord_new = int(input('введите ход по х: '))
-    y_cord_new = int(input('введите ход по y: '))
-
-    game.go(x_cord_new, y_cord_new, 'Гриша')
-    game.check_finished()'''
+    for player in player_symbol_dict:
+        one_cycle(player)
