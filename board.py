@@ -75,7 +75,7 @@ class Board:
         for i, e in enumerate(self.board):
             if i == self.y_cord_new:
                 for r, t in enumerate(self.board):
-                    dia_up_core.append(e[(-r)-1])
+                    dia_up_core.append(t[(-r)-1])
         if len(set(dia_up_core)) == 1 and dia_up_core[0] != '': 
             # print(self.going_player + ' Победил!!! диагональ вверх')
             return End.finished
