@@ -1,10 +1,8 @@
 from typing import Dict, Tuple
 
 
-from template import Board, End
+from board import Board, End
 
-class Player:
-    pass
 
 
 class Compositor:
@@ -14,14 +12,14 @@ class Compositor:
         self._board_num = x_size * y_size
         self._last_board_index = self._board_num - 1
 
-        self._player_symbol : Dict[Player, int] = {}
+        self._player_symbol : Dict[str, int] = {}
         
-        self._board_list = []
-        self._init_boards()
+        self._board_list : list[Board] = []
 
-    def _init_boards(self):
+    def init(self):
+        '''Init boards after appendig players'''
         for i in range(self._board_num):
-            new_board = Board(3, [])
+            new_board = Board([3, 3], self._player_symbol)
             self._board_list.append(new_board)
 
 
@@ -59,9 +57,14 @@ class Compositor:
         return (board_index, (x_x, y_y))
     
 
-    def add_player(self, new_player : Player):
-        symbol = len(self._player_symbol)
+    def add_player(self, new_player : str, symbol = None):
+        if symbol is None:
+            symbol = len(self._player_symbol)
         self._player_symbol[new_player] = symbol
+
+
+    def get_board_list(self,) -> list[Board]:
+        return self._board_list
 
 
 
