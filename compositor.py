@@ -43,8 +43,8 @@ class Compositor:
 
     def global_to_local(self, x_i, y_i) -> Tuple[int, Tuple[int, int]] | None:
         '''return (board_index, (x_x, y_y))'''
-        x_b = x_i // self._x_size
-        y_b = y_i // self._y_size
+        x_b = x_i // 3
+        y_b = y_i // 3
         board_index = x_b + (y_b * self._x_size)
         if board_index > self._last_board_index:
             return None
