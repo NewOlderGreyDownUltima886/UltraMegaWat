@@ -1,5 +1,0 @@
-
-
-
-from compositor import Compositor
-

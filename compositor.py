@@ -1,7 +1,7 @@
 from typing import Dict, Tuple
 
 
-from main import Board, End
+from template import Board, End
 
 class Player:
     pass
@@ -26,10 +26,12 @@ class Compositor:
 
 
     def go(self, x, y, player) -> End:
+        if player not in self._player_symbol:
+            raise Exception("Нет такого игрока!")
         res = self.global_to_local(x, y)
 
         if not res:
-            raise
+            return End.no
         
         board_index, (x_x, y_y) = res
         board : Board = self._board_list[board_index]
@@ -61,8 +63,3 @@ class Compositor:
 
 
 
-comp = Compositor(3, 2)
-print(comp.global_to_local(4, 3))
-print(comp.global_to_local(4, 2))
-print(comp.global_to_local(3, 1))
-print(comp.global_to_local(3, 3))
