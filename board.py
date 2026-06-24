@@ -37,7 +37,7 @@ class Board:
 
         'проверка на вшивость'
         if self.board[y_cord_new][x_cord_new] in self.player_symbols_list:
-            print('это место занято!')
+            # print('это место занято!')
             return End.no
         'ход игрока'
 
@@ -50,8 +50,8 @@ class Board:
         self.board[y_cord_new][x_cord_new] = self.new_symbol
 
         # вывод поля
-        for i, e in enumerate(self.board):
-            print(str(e))
+        # for i, e in enumerate(self.board):
+            # print(str(e))
 
         return self.check_finished()
 
@@ -59,7 +59,7 @@ class Board:
         # проверка по горизонтали
         y_core = self.board[self.y_cord_new]
         if len(set(y_core)) == 1 and y_core[0] != '': 
-            print(self.going_player + ' Победил!!! горизонталь')
+            # print(self.going_player + ' Победил!!! горизонталь')
             return End.finished
 
         # проверка по вертикали
@@ -67,7 +67,7 @@ class Board:
         for i, n in enumerate(self.board):
             x_core.append(n[self.x_cord_new])
         if len(set(x_core)) == 1 and x_core[0] != '': 
-            print(self.going_player + ' Победил!!! вертикаль')
+            # print(self.going_player + ' Победил!!! вертикаль')
             return End.finished
 
         # проверка по диагонали вверх
@@ -77,7 +77,7 @@ class Board:
                 for r, t in enumerate(self.board):
                     dia_up_core.append(e[(-r)-1])
         if len(set(dia_up_core)) == 1 and dia_up_core[0] != '': 
-            print(self.going_player + ' Победил!!! диагональ вверх')
+            # print(self.going_player + ' Победил!!! диагональ вверх')
             return End.finished
         
         # проверка по диагонали вниз
@@ -87,7 +87,7 @@ class Board:
                 for r, t in enumerate(self.board):
                     dia_down_core.append(t[r])
         if len(set(dia_down_core)) == 1 and dia_down_core[0] != '': 
-            print(self.going_player + ' Победил!!! диагональ вниз')
+            # print(self.going_player + ' Победил!!! диагональ вниз')
             return End.finished
         
         return End.ok
@@ -98,27 +98,27 @@ class Board:
 # game.check_finished()
 
 
-player_symbol_dict={'Коля': '+', 'Андрей': '#'}
-game = Board([3, 3], player_symbol_dict)
+# player_symbol_dict={'Коля': '+', 'Андрей': '#'}
+# game = Board([3, 3], player_symbol_dict)
 
-def one_cycle(player):
-    try:
-        print(f'\nХодит: {player}')
-        x_cord_new = int(input('введите ход по х: '))
-        y_cord_new = int(input('введите ход по y: '))
+# def one_cycle(player):
+#     try:
+#         print(f'\nХодит: {player}')
+#         x_cord_new = int(input('введите ход по х: '))
+#         y_cord_new = int(input('введите ход по y: '))
 
-        res = game.go(x_cord_new, y_cord_new, player)
-        if res == End.no:
-            print('Попробуй еще раз')
-            return one_cycle(player)
-        elif res == End.finished:
-            print(f"{player} победил!")
-            quit()
+#         res = game.go(x_cord_new, y_cord_new, player)
+#         if res == End.no:
+#             print('Попробуй еще раз')
+#             return one_cycle(player)
+#         elif res == End.finished:
+#             print(f"{player} победил!")
+#             quit()
 
-    except Exception:
-            print('Произошла какая-то ошибка, попробуйте еще раз...')
-            return one_cycle(player)
+#     except Exception:
+#             print('Произошла какая-то ошибка, попробуйте еще раз...')
+#             return one_cycle(player)
 
-while True:
-    for player in player_symbol_dict:
-        one_cycle(player)
+# while True:
+#     for player in player_symbol_dict:
+#         one_cycle(player)
